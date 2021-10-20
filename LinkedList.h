@@ -24,9 +24,9 @@ public:
     void deleteNodeByIndex(int);
     void deleteNodeByValue(T);
 
-    void findIndexByValue(T);
+    T findIndexByValue(T);
 
-    LinkedList<T> operator[]();
+    T operator[](int);
 
     template<class Type> friend std::ostream & operator<<(std::ostream&, LinkedList<Type>);
 };
@@ -46,14 +46,14 @@ bool LinkedList<T>::isNull() {
 
 template<typename T>
 void LinkedList<T>::addNodeToBegin(Node<T> & node){
-    node.set_next(head)
+    node.set_next(head);
     head = *node;
 }
 
 template<typename T>
 void LinkedList<T>::addNodeToEnd(Node<T> & node) {
-    tail->set_next(*node)
-    node.set_next(tail)
+    tail->set_next(*node);
+    node.set_next(tail);
 }
 
 template<typename T>
@@ -88,7 +88,7 @@ void LinkedList<T>::deleteLastNode() {
         next_ = next_->get_next();
     }
     prev_->set_next(nullptr);
-    tail =
+    tail = prev_;
 }
 
 template<typename T>
@@ -109,22 +109,53 @@ void LinkedList<T>::deleteNodeByIndex(int index) {
 
 template<typename T>
 void LinkedList<T>::deleteNodeByValue(T el) {
-
+    auto next_ = head->get_next();
+    auto prev_ = head->get_next();
+    while(prev_->get_next()->get_el() != el) {
+        prev_ = next_;
+        next_ = next_->get_next();
+        if (next_ == nullptr) {
+            cout << "Value out of range" << endl;
+            return;
+        }
+    }
+    delete prev_->get_next();
+    prev_->set_next(next_);
 }
 
 template<typename T>
-LinkedList<T> LinkedList<T>::operator[]() {
-    return LinkedList<T>();
+T LinkedList<T>::operator[](int index) {
+    auto next_ = head->get_next();
+    auto prev_ = head->get_next();
+    for(int i = 0;i < index - 1;i++) {
+        prev_ = next_;
+        next_ = next_->get_next();
+        if (next_ == nullptr) {
+            cout << "Index out of range" << endl;
+            return;
+        }
+    }
+    return prev_->get_next()->get_el();
 }
 
 template<class Type>
 std::ostream &operator<<(std::ostream &, LinkedList<Type>) {
-    return <#initializer#>;
+    //return <#initializer#>;
 }
 
 template<typename T>
-void LinkedList<T>::findIndexByValue(T el) {
-
+T LinkedList<T>::findIndexByValue(T el) {
+    auto next_ = head->get_next();
+    auto prev_ = head->get_next();
+    while(prev_->get_next()->get_el() != el) {
+        prev_ = next_;
+        next_ = next_->get_next();
+        if (next_ == nullptr) {
+            cout << "Value out of range" << endl;
+            return;
+        }
+    }
+    return prev_->get_next()->get_el();
 }
 
 #endif //LINKEDLIST_LINKEDLIST_H
