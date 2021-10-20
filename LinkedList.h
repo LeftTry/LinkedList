@@ -58,7 +58,9 @@ void LinkedList<T>::addNodeToEnd(Node<T> & node) {
 
 template<typename T>
 void LinkedList<T>::deleteFirstNode() {
-
+    auto node = head->get_next();
+    delete head;
+    head = node;
 }
 
 template<typename T>
@@ -79,16 +81,34 @@ void LinkedList<T>::addNode(Node<T> & node, int index) {
 
 template<typename T>
 void LinkedList<T>::deleteLastNode() {
-
+    auto next_ = head->get_next();
+    auto prev_ = head->get_next();
+    while(next_ != nullptr){
+        prev_ = next_;
+        next_ = next_->get_next();
+    }
+    prev_->set_next(nullptr);
+    tail =
 }
 
 template<typename T>
-void LinkedList<T>::deleteNodeByIndex(int) {
-
+void LinkedList<T>::deleteNodeByIndex(int index) {
+    auto next_ = head->get_next();
+    auto prev_ = head->get_next();
+    for(int i = 0;i < index - 1;i++) {
+        prev_ = next_;
+        next_ = next_->get_next();
+        if (next_ == nullptr) {
+            cout << "Index out of range" << endl;
+            return;
+        }
+    }
+    delete prev_->get_next();
+    prev_->set_next(next_);
 }
 
 template<typename T>
-void LinkedList<T>::deleteNodeByValue(T) {
+void LinkedList<T>::deleteNodeByValue(T el) {
 
 }
 
@@ -103,7 +123,7 @@ std::ostream &operator<<(std::ostream &, LinkedList<Type>) {
 }
 
 template<typename T>
-void LinkedList<T>::findIndexByValue(T) {
+void LinkedList<T>::findIndexByValue(T el) {
 
 }
 
