@@ -1,3 +1,6 @@
+#ifndef NODE_H
+#define NODE_H
+
 template <typename T>
 class Node{
     Node<T>* next;
@@ -44,4 +47,6 @@ template<typename T>
 void Node<T>::set_next(Node<T> *next_) {
     next = next_;
 }
+
+#endif // NODE_H
 

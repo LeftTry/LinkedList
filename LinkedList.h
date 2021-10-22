@@ -12,6 +12,7 @@ class LinkedList{
     Node<T>* tail;
 public:
     LinkedList();
+    LinkedList(int);
 
     bool isNull();
 
@@ -38,6 +39,23 @@ LinkedList<T>::LinkedList() {
 }
 
 template<typename T>
+LinkedList<T>::LinkedList(int size){
+    T a;
+    cin >> a;
+    Node<T> node(a);
+    addNodeToBegin(node);
+    tail = &node;
+    for(int i = 0;i < size - 1;i++){
+        T a1;
+        cin >> a1;
+        Node<T> *node1 = new Node<T>(a1);
+        //cout << node1 << endl;
+        addNodeToEnd(*node1);
+        //cout << "None";
+    }
+}
+
+template<typename T>
 bool LinkedList<T>::isNull() {
     if(head == nullptr)
         return true;
@@ -47,20 +65,22 @@ bool LinkedList<T>::isNull() {
 template<typename T>
 void LinkedList<T>::addNodeToBegin(Node<T> & node){
     node.set_next(head);
-    head = *node;
+    head = &node;
+    //cout << head;
 }
 
 template<typename T>
 void LinkedList<T>::addNodeToEnd(Node<T> & node) {
-    tail->set_next(*node);
-    node.set_next(tail);
+    node.set_next(nullptr);
+    tail->set_next(&node);
+    tail = &node;
 }
 
 template<typename T>
 void LinkedList<T>::deleteFirstNode() {
     auto node = head->get_next();
     delete head;
-    head = node;
+    head = &node;
 }
 
 template<typename T>
@@ -75,7 +95,7 @@ void LinkedList<T>::addNode(Node<T> & node, int index) {
             return;
         }
     }
-    prev_->set_next(*node);
+    prev_->set_next(&node);
     node.set_next(next_);
 }
 
@@ -139,8 +159,15 @@ T LinkedList<T>::operator[](int index) {
 }
 
 template<class Type>
-std::ostream &operator<<(std::ostream &, LinkedList<Type>) {
-    //return <#initializer#>;
+std::ostream &operator<<(std::ostream & out, LinkedList<Type> ll) {
+    Node<Type> node = *ll.head;
+    if(node.get_next() == nullptr) cout << node.get_el() << " ";
+    while(node.get_next() != nullptr){
+        cout << node.get_el() << " ";
+        node = *node.get_next();
+    }
+    cout << node.get_el() << " ";
+    return out;
 }
 
 template<typename T>

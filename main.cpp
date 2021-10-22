@@ -3,6 +3,11 @@
 #include "LinkedList.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    LinkedList<int> list(3);
+    Node<int> b(4);
+    list.addNodeToBegin(b);
+    Node<int> a(5);
+    list.addNode(a, 3);
+    cout << list;
     return 0;
 }
