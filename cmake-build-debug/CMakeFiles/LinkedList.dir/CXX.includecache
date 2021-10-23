@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/LinkedList.h
+Node.h
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/Node.h
+iostream
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/iostream
+
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/Node.h
+
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/main.cpp
+iostream
+-
+Node.h
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/Node.h
+LinkedList.h
+C:/Users/stahov.ia.NET/CLionProjects/LinkedList/LinkedList.h
+
