@@ -4,23 +4,28 @@
 
 int main() {
     LinkedList<int> list;
-    cout << list.isNull();
+    if(list.isNull()) cout << "List is empty" << endl;
+    else cout << "List is not empty" << endl;
     int size;
+    cout << "Please enter list size:" << endl;
     cin >> size;
     int a;
+    cout << "Please enter elements of the list:" << endl;
     cin >> a;
-    Node<int> node(a);
-    list.addNodeToBegin(node);
+    list.addNodeToBegin(a);
     for(int i = 0;i < size - 1;i++){
         int a1;
         cin >> a1;
-        auto *node1 = new Node<int>(a1);
-        list.addNodeToEnd(*node1);
+        list.addNodeToEnd(a1);
     }
-    Node<int> b(4);
+    cout << "Please enter the element to add to begin:" << endl;
+    int b;
+    cin >> b;
     list.addNodeToBegin(b);
-    Node<int> n(5);
-    list.addNode(n, 3);
+    cout << "Please enter value and index of element to insert into the list:" << endl;
+    int val, ind;
+    cin >> val >> ind;
+    list.addNode(val, ind);
     cout << list << endl;
     list.deleteFirstNode();
     list.deleteLastNode();
